@@ -8,8 +8,18 @@
 <body>
     <div><h1>IP Checker Website</h1></div>
     <div>
-        <div><input type="text" name="ip_value" id=""></div>
-        <div><button type="submit">search</button></div>
+        <form action="/virustotal" method="get">
+            <label for="inputName">Input Value:</label><br>
+            <input type="text" id="inputName" name="inputName"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div>
+        <div><div> Cisco Talos : </div> <div><span></span></div></div>
+        <div><div> VirusTotal : </div> <div><span></span></div></div>
+        <div><div> IBM Exforce : </div> <div><span></span></div></div>
+        <div><div> AbuseIPDB : </div> <div><span></span></div></div>
+        <div><div> Infoblox : </div> <div><span></span></div></div>
     </div>
 </body>
 </html>
