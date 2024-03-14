@@ -15,17 +15,17 @@ app.get('/', (req, res) => {
         if (err) {
             res.status(500).send('Internal Server Error');
         } else {
-            res.status(200).type('text/html').send(data);
+            res.status(200).type('text/html').send(ipAddress);
         }
     });
 });
 
 // Route for '/virustotal'
 app.get('/virustotal', (req, res) => {
-    const data = req.query.inputName
-    console.log(data)
-    virusTotalFetchData(data, res);
-    res.send('Data received successfully')
+    const ipAddress = req.query.inputName
+    console.log(ipAddress)
+    virusTotalFetchData(ipAddress);
+    res.send('ipAddress received successfully')
 });
 
 // 404 Not Found handler
