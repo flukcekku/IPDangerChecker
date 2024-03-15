@@ -1,5 +1,5 @@
 // const fetch = require('node-fetch');
-
+// function.js
 async function virusTotalFetchData(ipAddress) {
     try {
       const fetch = (await import('node-fetch')).default; // เปลี่ยนเป็น dynamic import

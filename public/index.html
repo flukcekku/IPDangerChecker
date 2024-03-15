@@ -8,14 +8,14 @@
 <body>
     <div><h1>IP Checker Website</h1></div>
     <div>
-        <form action="/virustotal" method="get">
+        <div id="inputForm">
             <label for="inputName">Input Value:</label><br>
             <input type="text" id="inputName" name="inputName"><br>
-            <input type="submit" value="Submit">
-        </form>
+            <button type="button" id="submitButton">Submit</button>
+        </div>
     </div>
     <div>
-        <div><div> Cisco Talos : </div> <div><span></span></div></div>
+        <div><div> Cisco Talos : </div> <div><span id="showData"></span></div></div>
         <div><div> VirusTotal : </div> <div><span></span></div></div>
         <div><div> IBM Exforce : </div> <div><span></span></div></div>
         <div><div> AbuseIPDB : </div> <div><span></span></div></div>
