@@ -4,31 +4,31 @@
 // const fetch = require('node-fetch');
 
 
-// async function virusTotalFetchData(ipAddress) {
-//     try {
-//         const fetch = (await import('node-fetch')).default;
-//         const url = `https://www.virustotal.com/api/v3/ip_addresses/${ipAddress}`;
-//         const options = {
-//         method: 'GET',
-//         headers: {
-//             accept: 'application/json',
-//             'x-apikey': 'd0dc001ece4000b8ef340d281d600ca253abb6cf1a9808848caee762c2d138fe',
-//         },
-//         };
+async function virusTotalFetchData(ipAddress) {
+    try {
+        const fetch = (await import('node-fetch')).default;
+        const url = `https://www.virustotal.com/api/v3/ip_addresses/${ipAddress}`;
+        const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            'x-apikey': 'd0dc001ece4000b8ef340d281d600ca253abb6cf1a9808848caee762c2d138fe',
+        },
+        };
 
-//         const response = await fetch(url, options);
+        const response = await fetch(url, options);
 
-//         if (response.ok) {
-//         const data = await response.json();
-//         return data;
-//         } else {
-//         throw new Error('Network response was not ok.');
-//         }
-//     } catch (error) {
-//         console.error(error.message);
-//         return null;
-//     }
-// }
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+        throw new Error('Network response was not ok.');
+        }
+    } catch (error) {
+        console.error(error.message);
+        return null;
+    }
+}
 
 // async function abuseFetchData(ipAddress) {
 // // const fetch = (await import('node-fetch')).default;
@@ -94,5 +94,4 @@ async function abuseFetchData(ipAddress) {
 // })();
 
 
-  module.exports = { abuseFetchData };
-  
+module.exports = { virusTotalFetchData, abuseFetchData };

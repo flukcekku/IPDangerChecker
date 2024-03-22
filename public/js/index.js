@@ -6,10 +6,83 @@ document.getElementById('submitButton').addEventListener('click', function(event
     fetch(virustotalAPI)
     .then(response=>response.json())
     .then(data=> {
-        const cisco_showData = document.getElementById('cisco_showData')
+        const virustotal_showData = document.getElementById('virustotal_showData')
         const datastring = JSON.stringify(data)
-        cisco_showData.innerText = 'data from server: ' + datastring
+        // virustotal_showData.innerText = 'data from server: ' + datastring
 
+        function summarizeAnalysis(data) {
+          const analysisResults = data.data.attributes.last_analysis_results;
+          const maliciousEngines = [];
+          const suspiciousEngines = [];
+        
+          // สร้างตาราง HTML
+          const table = document.createElement('table');
+          table.classList.add('custom-table');
+          table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>Engine</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ข้อมูลจะถูกแทรกที่นี่ -->
+            </tbody>
+          `;
+        
+          // เลือก tbody เพื่อนำข้อมูลที่ได้ไปแทรก
+          const tbody = table.querySelector('tbody');
+        
+          // วนลูปผ่านผลลัพธ์ทั้งหมด
+          for (const engine in analysisResults) {
+            const result = analysisResults[engine].result;
+            // ตรวจสอบผลลัพธ์ที่ไม่ใช่ "unrated" และ "clean"
+            if (result !== "unrated" && result !== "clean") {
+              // สร้างแถวของตาราง
+              const row = document.createElement('tr');
+              row.innerHTML = `
+                  <td>${engine}</td>
+                  <td>${result}</td>
+              `;
+              // เพิ่มแถวลงใน tbody
+              tbody.appendChild(row);
+        
+              // เช็คว่ามีความเสี่ยงหรือไม่
+              if (result === "malicious") {
+                maliciousEngines.push(engine);
+              } else if (result === "suspicious") {
+                suspiciousEngines.push(engine);
+              }
+            }
+          }
+
+          // เรียกใช้ container ที่มี id เป็น 'virustotal_showData'
+          // const resultContainer = document.getElementById('virustotal_showData');
+          // เพิ่มตารางลงใน container
+          virustotal_showData.innerHTML = ''; // Clear previous table
+          if (maliciousEngines.length > 0 || suspiciousEngines.length > 0) {
+            virustotal_showData.appendChild(table);
+          } else {
+            virustotal_showData.innerText = 'IP Address ' + data.data.id + ' is safe.';
+          }
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+          .custom-table,
+          .custom-table th,
+          .custom-table td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+          }
+        `;
+
+        // เพิ่ม style เข้าไปในหัวของเอกสาร
+        document.head.appendChild(style);
+        
+
+        summarizeAnalysis(data);
     })
     .catch(error => console.error("Error = ",error))
 

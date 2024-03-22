@@ -23,18 +23,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 
 // Route for '/virustotal'
-// app.get('/virustotal', async (req, res) => {
-//     const ipAddress = req.query.inputName
-//     console.log(ipAddress)
-//     try {
-//         const data = await virusTotalFetchData(ipAddress);
-//         res.json(data)
-//     }catch (error) {
-//         console.error("error", error);
-//         res.status(500).send("Internal Server Error")
-//     }
+app.get('/virustotal', async (req, res) => {
+    const ipAddress = req.query.inputName
+    console.log(ipAddress)
+    try {
+        const data = await virusTotalFetchData(ipAddress);
+        res.json(data)
+    }catch (error) {
+        console.error("error", error);
+        res.status(500).send("Internal Server Error")
+    }
     
-// });
+});
 
 app.get('/abuseipdb', async (req, res) => {
     const ipAddress = req.query.inputName
