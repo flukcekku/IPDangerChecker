@@ -1,7 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const { virusTotalFetchData } = require('./function');
+const { virusTotalFetchData, abuseFetchData } = require('./function');
+
 
 const app = express();
 const port = 3000;
@@ -22,23 +23,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 // });
 
 // Route for '/virustotal'
-app.get('/virustotal', async (req, res) => {
+// app.get('/virustotal', async (req, res) => {
+//     const ipAddress = req.query.inputName
+//     console.log(ipAddress)
+//     try {
+//         const data = await virusTotalFetchData(ipAddress);
+//         res.json(data)
+//     }catch (error) {
+//         console.error("error", error);
+//         res.status(500).send("Internal Server Error")
+//     }
+    
+// });
+
+app.get('/abuseipdb', async (req, res) => {
     const ipAddress = req.query.inputName
     console.log(ipAddress)
     try {
-        const data = await virusTotalFetchData(ipAddress);
-        res.json(data)
+        const abuseData = await abuseFetchData(ipAddress);
+        res.json(abuseData)
     }catch (error) {
         console.error("error", error);
         res.status(500).send("Internal Server Error")
     }
     
 });
-
-// 404 Not Found handler
-// app.use((req, res) => {
-//     res.status(404).send('Not Found');
-// });
 
 app.listen(port, () => {
     console.log(`Server running at port ${port}`);
